@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+
+@*<div>*@
+
+<div class="header-image">
+    <h1><b>InOut Tech</b></h1>
+</div>
+
+<div class="index">
+    <h4 class="view"><span data-toggle="tooltip" title="View All Customers"><b>@Html.ActionLink("Customers", "CustomerList", "Customer")</b></span></h4>
+
+    <h4 class="view"><span data-toggle="tooltip" title="View All States"><b>@Html.ActionLink("States", "StateList", "State")</b></span></h4>
+
+    <h4 class="view"><span data-toggle="tooltip" title="View All Products"><b>@Html.ActionLink("Products", "ProductList", "Product")</b></span></h4>
+
+    <h4 class="view"><span data-toggle="tooltip" title="View All Technicians"><b>@Html.ActionLink("Technicians", "TechList", "Tech")</b></span></h4>
+
+    <h4 class="view"><span data-toggle="tooltip" title="View All Registrations"><b>@Html.ActionLink("Registrations", "RegList", "Registration")</b></span></h4>
+
+    <h4 class="view"><span data-toggle="tooltip" title="Contact Us"><b>@Html.ActionLink("Contact Us", "Contact", "Home")</b></span></h4>
+</div>

@@ -1,0 +1,52 @@
+﻿@model DBProgrammingClass_III.Models.Registration
+@{
+    ViewBag.Title = "AddReg";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<script type="text/javascript" src="~/Content/app.js"></script>
+
+<h2><b>Add a Registration</b></h2>
+
+<div class="form" align="center">
+    @using (Html.BeginForm("AddReg", "Registration", FormMethod.Post))
+    {
+        <div class="row">
+            <div>
+                <b>Customer ID:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.CustomerID, new { @class = "form-control", @placeholder = "Customer ID.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Product Code:</b>
+                    @Html.TextBoxFor(c => c.ProductCode, new { @class = "form-control", @placeholder = "Product Code.." })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Date:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.RegistrationDate, new { @class = "form-control", @type = "date", @placeholder = "Date.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div>
+            <div class="col-md-12">
+                <b><input class="button" type="submit" value="Submit" /></b>
+            </div>
+            <div class="back" data-toggle="tooltip" title="Go to Registration List">
+                @Html.ActionLink("Back", "RegList", "Registration")
+            </div>
+        </div>
+    }
+</div>
+

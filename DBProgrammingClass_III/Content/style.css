@@ -1,0 +1,243 @@
+﻿html {
+    background-color: aliceblue;
+}
+body {
+    background-color: aliceblue;
+}
+.index{
+    text-align:center;
+    padding: 3%;
+    width: auto;
+
+}
+.send-email {
+    background-color: #fbfbfb;
+    text-align:center;
+    border: 1px solid green;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+address{
+    margin:10px;
+}
+.view {
+    margin: 10%;
+    background-color: #c6a5ae;
+    padding: 2.5%;
+    border-radius: 5%;
+    border: 2px solid brown;
+}
+.header-image {
+    background-image: url("Pic/pic1.jpg");
+    background-size: cover;
+    width:stretch;
+    border:7px solid black;
+}
+h4{
+    color: brown;
+}
+h1 {
+    text-align: center;
+    color: brown;
+    padding: 20%;
+    width: auto;
+    font-size:xx-large;
+    border:solid 1px white;
+}
+.navbar-fixed-top {
+    background-color: #243c52;
+}
+.pointer {
+    cursor: pointer;
+}
+label{
+    text-align:center;
+}
+h2 {
+    color: brown;
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 20px;
+    text-align: center;
+    border-style: inset;
+    background-color: #fbfbfb;
+    margin-bottom: 3%;
+}
+.table{
+    border: 2px solid green;
+    background-color: #fbfbfb;
+    padding: 20px;
+    text-align:center;
+}
+th{
+    background-color: #c6a5ae;
+    color:white;
+    text-align: center;
+}
+.add {
+    text-align: right;
+    padding: 10px;
+}
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+.fa:hover {
+        opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+.form{
+    padding: 10%;
+    display:inline;
+}
+.form-control{
+    text-align:center;
+    display:inline-table;
+    margin:20px;
+    width: auto;
+}
+.row {
+    font-size: larger;
+    border: solid;
+    border-block-color: black;
+    border-radius: 5px;
+    width: 30%;
+    padding: 1%;
+    background-color: #fbfbfb;
+    color: brown;
+}
+.modal-title {
+    text-align: center;
+    background-color: #fbfbfb;
+    color: brown;
+}
+.modal-body{
+    text-align:center;
+}
+.back {
+    padding: 60px;
+    font-weight: bold;
+}
+.button {
+    font-size: 15px;
+    background-color: #04AA6D;
+    border-radius: 3px;
+    color: white;
+}
+.tech{
+    padding-bottom: 20px;
+}
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+.contact-button{
+    margin: 0.5%;
+}
+.autocomplete-container {
+    /*the container must be positioned relative:*/
+    position: relative;
+}
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background-color: #fff;
+}
+.autocomplete-items div:hover {
+     /*when hovering an item:*/
+     background-color: rgba(0, 0, 0, 0.1);
+}
+
+    .autocomplete-items .autocomplete-active {
+        /*when navigating through the items using the arrow keys:*/
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+/* The popup chat - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+    /* Full-width textarea */
+    .form-container textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+        resize: none;
+        min-height: 200px;
+    }
+
+        /* When the textarea gets focus, do something */
+        .form-container textarea:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+        background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+    }

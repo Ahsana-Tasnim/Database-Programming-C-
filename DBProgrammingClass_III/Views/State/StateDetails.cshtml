@@ -1,0 +1,22 @@
+﻿@model DBProgrammingClass_III.Models.State
+@{
+    ViewBag.Title = "StateDetails";
+}
+
+<div>
+    <label>State Code</label>
+    <label>@Html.TextBoxFor(x => x.StateCode)</label>
+    <br /><br />
+
+    <label>State Name</label>
+    <label>@Html.TextBoxFor(x => x.StateName)</label>
+    <br /><br />
+
+    <label>First Zip Code</label>
+    <label>@Html.TextBoxFor(x => x.FirstZipCode)</label>
+    <br /><br />
+
+    <label>Last Zip Code</label>
+    <label>@Html.TextBoxFor(x => x.LastZipCode)</label>
+</div>
+

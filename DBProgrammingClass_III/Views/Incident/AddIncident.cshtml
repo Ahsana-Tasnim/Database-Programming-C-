@@ -1,0 +1,84 @@
+﻿@model DBProgrammingClass_III.Models.Incident
+@{
+    ViewBag.Title = "AddIncident";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<script type="text/javascript" src="~/Content/app.js"></script>
+
+<h2><b>Add an Incident</b></h2>
+
+<div class="form" align="center">
+    @using (Html.BeginForm("AddIncident", "Incident", FormMethod.Post))
+    {
+        <div class="row">
+            <div>
+                <b>Title:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.Title, new { @class = "form-control", @placeholder = "Title.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Description:</b>
+                <div class="autocomplete-container" id="autocomplete-container">
+                    @Html.TextBoxFor(c => c.Description, new { @class = "form-control", @placeholder = "Description.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Date Opened:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.DateOpened, new { @class = "form-control", @type="date", @placeholder = "Date Opened.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Date Closed</b>
+                <div>
+                    @Html.TextBoxFor(c => c.DateClosed, new { @class = "form-control", @type = "date", @placeholder = "Date Closed.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Customer ID:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.CustomerID, new { @class = "form-control", @placeholder = "Customer ID.." })
+                    @*@Html.DropDownList("CustomerList", Model.Customer.)*@
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Product ID:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.ProductCode, new { @class = "form-control", @placeholder = "Product ID.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div>
+            <div class="col-md-12">
+                <b><input class="button" type="submit" value="Submit" /></b>
+            </div>
+            <div class="back" data-toggle="tooltip" title="Go to Customer List">
+                @Html.ActionLink("Back", "IncidentList", "Incident")
+            </div>
+        </div>
+    }
+</div>

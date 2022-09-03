@@ -1,0 +1,51 @@
+﻿@model DBProgrammingClass_III.Models.Technician
+@{
+    ViewBag.Title = "AddTech";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+
+<h2>Add a Technician</h2>
+
+<div class="form" align="center">
+    @using (Html.BeginForm("AddTech", "Tech", FormMethod.Post))
+    {
+        <div class="row">
+            <div>
+                <b>Name:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.Name, new { @class = "form-control", @placeholder = "Name.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Phone No:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.Phone, new { @class = "form-control", @placeholder = "Phone No.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Email Address:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.Email, new { @class = "form-control", @placeholder = "Email.." })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+            <div class="col-md-12">
+                <b><input class="button" type="submit" value="Submit" /></b>
+            </div>
+            <div class="back" data-toggle="tooltip" title="Go to Technician List">
+                @Html.ActionLink("Back", "TechList", "Tech")
+            </div>
+        </div>
+    }
+</div>

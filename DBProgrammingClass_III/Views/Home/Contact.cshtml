@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2><b>Contact Us</b></h2>
+<div class="send-email">
+    <h4><b>Send Email</b></h4>
+    @if (ViewBag.Error != null)
+    {
+        <h3> @ViewBag.Error </h3>
+    }
+    <form method="post" action="Contact">
+        <div class="container">
+            <span class="form-control-static"><b> Receiver:</b> </span> <input class="form-control" type="text" name="receiver" /><br />
+            <span class="form-control-static"><b>Subject:</b> </span> <input class="form-control" type="text" name="subject" /><br />
+            <span class="form-control-static"> <b>Message:</b> </span> <input class="form-control" type="text" name="message" /><br />
+            <span class="contact-button"><input class="btn btn-primary" type="submit" value="Send" /> </span>
+        </div>
+    </form>
+    <br /><br />
+</div>
+
+<div>
+    <h3>Contact Us on: </h3>
+    </div>
+<div class="col-md-12">
+        <a href="https://www.facebook.com" class="fa fa-facebook"></a><p>Facebook</p>
+
+        <a href="https://www.twitter.com" class="fa fa-twitter"></a><p>Twitter</p>
+ 
+        <a href="https://www.linkedin.com" class="fa fa-linkedin"></a><p>Linkedin</p>
+</div>
+<div>
+    <address>
+        InOut Tech<br />
+        123 Mountain Road, Moncton, NB<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+</div>

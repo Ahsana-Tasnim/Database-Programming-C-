@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BooksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="ZipCode" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="State1" Relationship="Self.FK_Customers_States" FromRole="Customers" ToRole="States" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Customers" FromRole="Customers" ToRole="Invoices" />
+  </EntityType>
+  <EntityType Name="InvoiceLineItem">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="ItemTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Invoice" Relationship="Self.FK_InvoiceLineItems_Invoices" FromRole="InvoiceLineItems" ToRole="Invoices" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_InvoiceLineItems_Products" FromRole="InvoiceLineItems" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProductTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="SalesTax" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="InvoiceTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Invoices_Customers" FromRole="Invoices" ToRole="Customers" />
+    <NavigationProperty Name="InvoiceLineItems" Relationship="Self.FK_InvoiceLineItems_Invoices" FromRole="Invoices" ToRole="InvoiceLineItems" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="OnHandQuantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InvoiceLineItems" Relationship="Self.FK_InvoiceLineItems_Products" FromRole="Products" ToRole="InvoiceLineItems" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateCode" />
+    </Key>
+    <Property Name="StateCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_States" FromRole="States" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="OrderOption">
+    <Key>
+      <PropertyRef Name="SalesTaxRate" />
+      <PropertyRef Name="FirstBookShipCharge" />
+      <PropertyRef Name="AdditionalBookShipCharge" />
+    </Key>
+    <Property Name="SalesTaxRate" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="FirstBookShipCharge" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="AdditionalBookShipCharge" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Customers_States">
+    <End Role="States" Type="Self.State" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateCode" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoices_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceLineItems_Invoices">
+    <End Role="Invoices" Type="Self.Invoice" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InvoiceLineItems" Type="Self.InvoiceLineItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoices">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="InvoiceLineItems">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceLineItems_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="InvoiceLineItems" Type="Self.InvoiceLineItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="InvoiceLineItems">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BooksEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="InvoiceLineItems" EntityType="Self.InvoiceLineItem" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="OrderOptions" EntityType="Self.OrderOption" />
+    <AssociationSet Name="FK_Customers_States" Association="Self.FK_Customers_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoices_Customers" Association="Self.FK_Invoices_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceLineItems_Invoices" Association="Self.FK_InvoiceLineItems_Invoices">
+      <End Role="Invoices" EntitySet="Invoices" />
+      <End Role="InvoiceLineItems" EntitySet="InvoiceLineItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceLineItems_Products" Association="Self.FK_InvoiceLineItems_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="InvoiceLineItems" EntitySet="InvoiceLineItems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

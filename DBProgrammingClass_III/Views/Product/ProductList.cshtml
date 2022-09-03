@@ -1,0 +1,73 @@
+﻿@model List<DBProgrammingClass_III.Models.Product>
+@{
+    ViewBag.Title = "ProductList";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<script type="text/javascript" src="~/Content/app.js"></script>
+
+<div>
+    <div class="col-md-12">
+        <h2><b>List of Products</b></h2>
+    </div>
+</div>
+<br />
+<br />
+
+@using (Html.BeginForm("ProductList", "Product", FormMethod.Get))
+{
+    <span><b>Search: </b></span>
+    <input type="text" placeholder="Search by name..." name="searchByProductName" id="searchByProductName" />
+    <input class="button" type="submit" value="Submit" />
+
+    <div class="add" title="Add a new Product">
+        <h4><span data-toggle="tooltip"><b>@Html.ActionLink("Add a Product", "AddProduct", "Product")</b></span></h4>
+    </div>
+
+    <table id="products" class="table">
+        <thead>
+            <tr>
+                <th><b>Code</b></th>
+                <th><b>Name</b></th>
+                <th><b>Action</b></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td><b>@product.ProductCode</b></td>
+                    <td data-toggle="tooltip" title="View Product Details" onclick="getProductDetails('@product.ProductCode');" scope="row" class="pointer"><b>@product.Name</b></td>
+                    <td>
+                        <b><span data-toggle="tooltip" title="Edit Product">@Html.ActionLink("Edit", "AddProduct", "Product", new { id = product.ProductCode.Trim() }, null)</span></b> ||
+                        <b><span data-toggle="tooltip" title="Delete Product">@Html.ActionLink("Delete", "Delete", "Product", new { id = product.ProductCode.Trim() })</span></b>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">
+                        <b>Product Details</b>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

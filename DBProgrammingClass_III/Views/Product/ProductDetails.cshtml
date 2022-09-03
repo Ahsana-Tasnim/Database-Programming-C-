@@ -1,0 +1,23 @@
+﻿@model DBProgrammingClass_III.Models.Product
+@{
+    ViewBag.Title = "ProductDetails";
+}
+
+<div>
+    <label>Code: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.ProductCode)</label>
+    <br /><br />
+
+          <label>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Name)</label>
+    <br /><br />
+
+          <label>Version: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Version)</label>
+    <br /><br />
+
+    <label>Release Date:</label>
+    <label>@Html.TextBoxFor(x => x.ReleaseDate)</label>
+    <br /><br />
+
+</div>

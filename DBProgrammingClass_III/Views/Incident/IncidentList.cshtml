@@ -1,0 +1,74 @@
+﻿@model List<DBProgrammingClass_III.Models.Incident>
+@{
+    ViewBag.Title = "IncidentList";
+}
+
+<
+<link rel="stylesheet" href="~/Content/style.css" />
+<script type="text/javascript" src="~/Content/app.js"></script>
+
+<div>
+    <div class="col-md-12">
+        <h2><b>List of Incidents</b></h2>
+    </div>
+</div>
+<br />
+<br />
+
+@using (Html.BeginForm("IncidentList", "Incident", FormMethod.Get))
+{
+    <span><b>Search: </b></span>
+    <input type="text" placeholder="Search by title..." name="searchByTitle" id="searchByTitle" />
+    <input class="button" type="submit" value="Submit" />
+
+    <div class="add" title="Add a new Incident">
+        <h4><span data-toggle="tooltip"><b>@Html.ActionLink("Add a Incident", "AddIncident", "Incident")</b></span></h4>
+    </div>
+
+    <table id="incidents" class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inc in Model)
+            {
+                <tr>
+                    <td><b>@inc.IncidentID</b></td>
+                    <td data-toggle="tooltip" title="View Incident Details" onclick="getIncDetails('@inc.IncidentID');" scope="row" class="pointer"><b>@inc.Title</b></td>
+                    <td>
+                        <b>@Html.ActionLink("Edit", "AddIncident", "Incident", new { id = inc.IncidentID }, null)</b> ||
+                        <b>@Html.ActionLink("Delete", "Delete", "Incident", new { id = inc.IncidentID })</b>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">
+                        <b>Incident Details</b>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

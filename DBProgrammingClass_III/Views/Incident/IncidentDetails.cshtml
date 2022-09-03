@@ -1,0 +1,31 @@
+﻿@model DBProgrammingClass_III.Models.Incident
+@{
+    ViewBag.Title = "IncidentDetails";
+}
+
+<div>
+    <label>Title: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Title)</label>
+    <br /><br />
+
+          <label>Description:&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Description)</label>
+    <br /><br />
+
+          <label>Date Opened: &nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.DateOpened)</label>
+    <br /><br />
+
+          <label>Date Closed: &nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.DateClosed)</label>
+    <br /><br />
+
+    <label>Customer ID: &nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.CustomerID)</label>
+    <br /><br />
+
+    <label>Product Code:</label>
+    <label>@Html.TextBoxFor(x => x.ProductCode)</label>
+   
+</div>
+

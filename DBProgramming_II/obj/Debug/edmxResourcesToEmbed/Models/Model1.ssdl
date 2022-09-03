@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BooksModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="ZipCode" Type="char" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceLineItems">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="InvoiceID" Type="int" Nullable="false" />
+    <Property Name="ProductCode" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="UnitPrice" Type="money" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="ItemTotal" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="ProductTotal" Type="money" Nullable="false" />
+    <Property Name="SalesTax" Type="money" Nullable="false" />
+    <Property Name="Shipping" Type="money" Nullable="false" />
+    <Property Name="InvoiceTotal" Type="money" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\SOURCE\WINTER_2022\DATABASEPROGRAMMING\DBPROGRAMMING_II\APP_DATA\BOOKS.MDF.dbo.OrderOptions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OrderOptions">
+    <Key>
+      <PropertyRef Name="SalesTaxRate" />
+      <PropertyRef Name="FirstBookShipCharge" />
+      <PropertyRef Name="AdditionalBookShipCharge" />
+    </Key>
+    <Property Name="SalesTaxRate" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="FirstBookShipCharge" Type="money" Nullable="false" />
+    <Property Name="AdditionalBookShipCharge" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="ProductCode" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UnitPrice" Type="money" Nullable="false" />
+    <Property Name="OnHandQuantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="StateCode" />
+    </Key>
+    <Property Name="StateCode" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="StateName" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Customers_States">
+    <End Role="States" Type="Self.States" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateCode" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceLineItems_Invoices">
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InvoiceLineItems" Type="Self.InvoiceLineItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoices">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="InvoiceLineItems">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceLineItems_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="InvoiceLineItems" Type="Self.InvoiceLineItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="InvoiceLineItems">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoices_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BooksModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceLineItems" EntityType="Self.InvoiceLineItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderOptions" EntityType="Self.OrderOptions" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[OrderOptions].[SalesTaxRate] AS [SalesTaxRate], 
+[OrderOptions].[FirstBookShipCharge] AS [FirstBookShipCharge], 
+[OrderOptions].[AdditionalBookShipCharge] AS [AdditionalBookShipCharge]
+FROM [dbo].[OrderOptions] AS [OrderOptions]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Customers_States" Association="Self.FK_Customers_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceLineItems_Invoices" Association="Self.FK_InvoiceLineItems_Invoices">
+      <End Role="Invoices" EntitySet="Invoices" />
+      <End Role="InvoiceLineItems" EntitySet="InvoiceLineItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceLineItems_Products" Association="Self.FK_InvoiceLineItems_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="InvoiceLineItems" EntitySet="InvoiceLineItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoices_Customers" Association="Self.FK_Invoices_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

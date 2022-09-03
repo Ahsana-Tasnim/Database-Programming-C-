@@ -1,0 +1,72 @@
+﻿@model List<DBProgrammingClass_III.Models.Technician>
+@{
+    ViewBag.Title = "TechList";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<script type="text/javascript" src="~/Content/app.js"></script>
+
+<div class="tech">
+    <div class="col-md-12">
+        <h2><b>List of Technicians</b></h2>
+    </div>
+</div>
+<br />
+<br />
+@using (Html.BeginForm("TechList", "Tech", FormMethod.Get))
+{
+    <span><b>Search: </b></span>
+    <input type="text" placeholder="Search by name..." name="searchByTechName" id="searchByTechName" />
+    <input class="button" type="submit" value="Submit" />
+
+    <div class="add" title="Add a new Technician">
+        <h4><span data-toggle="tooltip"><b>@Html.ActionLink("Add a Technician", "AddTech", "Tech")</b></span></h4>
+    </div>
+
+    <table id="techs" class="table">
+        <thead>
+            <tr>
+                <th><b>ID</b></th>
+                <th><b>Name</b></th>
+                <th><b>Action</b></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tech in Model)
+            {
+                <tr>
+                    <td><b>@tech.TechID</b></td>
+                    <td data-toggle="tooltip" title="View Technician Details" onclick="getTechDetails('@tech.TechID');" scope="row" class="pointer"><b>@tech.Name</b></td>
+                    <td>
+                        <b>@Html.ActionLink("Edit", "AddTech", "Tech", new { id = tech.TechID }, null)</b> ||
+                        <b>@Html.ActionLink("Delete", "Delete", "Tech", new { id = tech.TechID })</b>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">
+                        <b>Technician Details</b>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

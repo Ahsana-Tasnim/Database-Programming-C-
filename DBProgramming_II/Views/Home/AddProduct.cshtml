@@ -1,0 +1,47 @@
+﻿@model DBProgramming_II.Models.Product
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+<h2>Add a Product</h2>
+
+@using (Html.BeginForm("AddProduct", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.InvoiceLineItems);
+    @*@Html.HiddenFor(m => m.State);*@
+    @*@Html.HiddenFor(m => m.State1);*@
+    <div class="row">
+        <div class="col-md-12">
+            <b>Product Code </b>
+            @Html.TextBoxFor(c => c.ProductCode, new { @class = "form-control", @placeholder = "Code..." })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <b>Description </b>
+            @Html.TextBoxFor(c => c.Description, new { @class = "form-control", @placeholder = "Description.." })
+            <br />
+        </div>
+        <br />
+        <div class="col-md-12">
+            <b>Unit Price </b>
+            @Html.TextBoxFor(c => c.UnitPrice, new { @class = "form-control", @placeholder = "Price.." })
+            <br />
+        </div>
+        <br />
+        <div class="col-md-12">
+            <b>On Hand Quantity</b>
+            @Html.TextBoxFor(c => c.OnHandQuantity, new { @class = "form-control", @placeholder = "Quantity.." })
+            <br />
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            @*A submit button inside a form will ALWAYS submit the form*@
+            <input type="submit" value="Submit" />
+        </div>
+    </div>
+}

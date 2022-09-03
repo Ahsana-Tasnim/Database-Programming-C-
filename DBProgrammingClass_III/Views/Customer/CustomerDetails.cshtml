@@ -1,0 +1,36 @@
+﻿@model DBProgrammingClass_III.Models.Customer
+@{
+    ViewBag.Title = "CustomerDetails";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+
+<div>
+    <label>Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Name)</label>
+    <br /><br />
+
+          <label>Address:&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Address)</label>
+    <br /><br />
+
+          <label>City: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.City)</label>
+    <br /><br />
+
+          <label>State: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.State)</label>
+    <br /><br />
+
+          <label>Zip Code: &nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.ZipCode)</label>
+    <br /><br />
+
+          <label>Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Email)</label>
+    <br /><br />
+
+          <label>Phone: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Phone)</label>
+</div>
+

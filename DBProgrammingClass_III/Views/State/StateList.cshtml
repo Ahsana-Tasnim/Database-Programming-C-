@@ -1,0 +1,72 @@
+﻿@model List<DBProgrammingClass_III.Models.State>
+@{
+    ViewBag.Title = "StateList";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<script type="text/javascript" src="~/Content/app.js"></script>
+
+<div>
+    <div class="col-md-12">
+        <h2><b>List of States</b></h2>
+    </div>
+</div>
+<br />
+<br />
+
+@using (Html.BeginForm("StateList", "State", FormMethod.Get))
+{
+    <span><b>Search: </b></span>
+    <input type="text" placeholder="Search by name..." name="searchByStateName" id="searchByStateName" />
+    <input class="button" type="submit" value="Submit" />
+
+    <div class="add" title="Add a new State">
+        <h4><span data-toggle="tooltip"><b>@Html.ActionLink("Add a State", "AddState", "State")</b></span></h4>
+    </div>
+    <table id="states" class="table">
+        <thead>
+            <tr>
+                <th><b>State Code</b></th>
+                <th><b>State Name</b></th>
+                <th><b>Action</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var state in Model)
+            {
+                <tr>
+                    <td><b>@state.StateCode</b></td>
+                    <td data-toggle="tooltip" title="View State Details" onclick="getStateDetails('@state.StateCode');" scope="row" class="pointer"><b>@state.StateName</b></td>
+                    <td>
+                        <b><span data-toggle="tooltip" title="Edit State">@Html.ActionLink("Edit", "AddState", "State", new { id = state.StateCode }, null)</span></b> ||
+                        <b><span data-toggle="tooltip" title="Delete State">@Html.ActionLink("Delete", "Delete", "State", new { id = state.StateCode })</span></b>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">
+                        <b>State Details</b>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

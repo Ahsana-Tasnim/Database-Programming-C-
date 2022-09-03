@@ -1,0 +1,21 @@
+﻿@model DBProgrammingClass_III.Models.Technician
+@{
+    ViewBag.Title = "TechDetails";
+}
+
+<div>
+    <label>ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.TechID)</label>
+    <br /><br />
+
+    <label>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Name)</label>
+    <br /><br />
+
+    <label>Phone No:</label>
+    <label>@Html.TextBoxFor(x => x.Phone)</label>
+    <br /><br />
+
+    <label>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.Email)</label>
+</div>

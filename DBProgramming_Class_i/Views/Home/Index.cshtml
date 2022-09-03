@@ -1,0 +1,97 @@
+﻿@model DBProgramming_Class_i.Models.CombinedLists
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<link rel="stylesheet" href="~/Content/main.css" />
+<script src="~/Content/main.js"></script>
+
+<h2>List of Employees</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <span><b>Search: </b></span>
+        <input type="text" id="txtSearchFName" placeholder="Search by First Name..." />
+        <input type="button" id="btnSearch" value="Search" onclick="searchFName()" />
+        <span><b>Search: </b></span>
+        <input type="text" id="txtSearchLName" placeholder="Search by Last Name..." />
+        <input type="button" id="btnSearch" value="Search" onclick="searchLName()" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="employees">
+            <tr>
+                <th><input type="checkbox" /></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Depo</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox" /></td>
+                <td>
+                    <input type="text" placeholder="First Name..." id="fName" />
+                </td>
+                <td>
+                    <input type="text" placeholder="Last Name..." id="lName" />
+                </td>
+                <td>
+                    <select id="depoItem" name="depoItem">
+                        @foreach (var depo in Model.Department)
+                        {
+                            <option value="@depo.Dept_Id">@depo.Dept_Name</option>
+                        }
+                    </select>
+
+                    @*<input list="listOfDepos" name="depoItem" id="depoItem">
+                        <datalist id="listOfDepos">
+                            @foreach (var depo in Model.Department)
+                            {
+                                <option value="@depo.Dept_Id">@depo.Dept_Name</option>
+                            }
+                        </datalist>*@
+                </td>
+                <td>
+                    <input type="button" value="Save" onclick="saveEmployee();" />
+                </td>
+            </tr>
+            @foreach (var emp in Model.Employee)
+            {
+                <tr id="tr_@emp.Emp_Id">
+                    <td><input type="checkbox" /></td>
+                    <td>
+                        <input name="fName" type="text" value="@emp.First_Name" />
+                    </td>
+                    <td>
+                        <input name="lName" type="text" value="@emp.Last_Name" />
+                    </td>
+                    <td>
+                        <select name="depoItem">
+                            @foreach (var depo in Model.Department)
+                            {
+                                if (depo.Dept_Id == emp.Dept_Id)
+                                {
+                                    <option selected="selected" value="@depo.Dept_Id">@depo.Dept_Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@depo.Dept_Id">@depo.Dept_Name</option>
+                                }
+                            }
+                        </select>
+                        @*@emp.Department.Dept_Name*@
+                    </td>
+                    <td>
+                        <input type="button" value="Delete" onclick="deleteEmployee('@emp.Emp_Id');" />
+                        <input type="button" value="Update" onclick="updateEmployee('tr_@emp.Emp_Id');" />
+                        <input type="hidden" name="empId" value="@emp.Emp_Id" />
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

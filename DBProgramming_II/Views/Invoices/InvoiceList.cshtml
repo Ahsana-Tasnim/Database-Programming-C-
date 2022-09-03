@@ -1,0 +1,45 @@
+﻿@model List<DBProgramming_II.Models.Invoice>
+
+<h2>Invoice List</h2>
+
+@using (Html.BeginForm("InvoiceList", "Invoices", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <table id="invoices" class="table">
+                <thead>
+                    <tr>
+                        <th>Invoice ID</th>
+                        <th>Invoice Date</th>
+                        <th>Invoice LineItems</th>
+                        <th>Sales Tax</th>
+                        <th>Shipping Cost</th>
+                        <th>Product Total</th>
+                        <th>Invoice Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var invoice in Model)
+                    {
+                        <tr>
+                            <td class="info">@invoice.InvoiceID</td>
+                            <td class="warning">@invoice.InvoiceDate</td>
+                            <td class="success">@invoice.InvoiceLineItems</td>
+                            <td class="danger">@invoice.SalesTax</td>
+                            <td class="info">@invoice.Shipping</td>
+                            <td class="warning">@invoice.ProductTotal</td>
+                            <td class="success">@invoice.InvoiceTotal</td>
+                            <td class="info">
+                                @Html.ActionLink("Add/Edit", "AddInvoice", "Invoices", new { id = invoice.CustomerID }, null) ||
+                                @Html.ActionLink("Delete", "Delete", "Invoices", new { id = invoice.InvoiceID })
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+

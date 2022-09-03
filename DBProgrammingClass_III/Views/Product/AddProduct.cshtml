@@ -1,0 +1,61 @@
+﻿@model DBProgrammingClass_III.Models.Product
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+
+<h2><b>Add a Product</b></h2>
+
+<div class="form" align="center">
+    @using (Html.BeginForm("AddProduct", "Product", FormMethod.Post))
+    {
+        <div class="row">
+            <div>
+                <b>Product Code:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.ProductCode, new { @class = "form-control", @placeholder = "Product Code.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Name:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.Name, new { @class = "form-control", @placeholder = "Product Name.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Version:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.Version, new { @class = "form-control", @placeholder = "Version.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Release Date:</b>
+                <div>
+                    @Html.TextBoxFor(c => c.ReleaseDate, new { @class = "form-control", @type = "date", @placeholder = "Release Date.." })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+            <div class="col-md-12">
+                <b><input class="button" type="submit" value="Submit" /></b>
+            </div>
+            <div class="back" data-toggle="tooltip" title="Go to Product List">
+                @Html.ActionLink("Back", "ProductList", "Product")
+            </div>
+        </div>
+    }
+</div>

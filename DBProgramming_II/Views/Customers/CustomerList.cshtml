@@ -1,0 +1,54 @@
+﻿@model List<DBProgramming_II.Models.Customer>
+@{
+    ViewBag.Title = "CustomerList";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>List of Customers</h2>
+    </div>
+</div>
+
+@using (Html.BeginForm("CustomerList", "Customers", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <span><b>Search: </b></span>
+            <input type="text" placeholder="Search..." name="searchByName" id="searchByName" />
+        </div>
+        <div class="col-md-6">
+            <input type="submit" value="Submit"/>
+        </div>
+    </div>
+
+    <table id="customers" class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td class="info">@customer.CustomerID</td>
+                    <td class="success">@customer.Name</td>
+                    <td class="warning">@customer.Address</td>
+                    <td class="danger">@customer.City</td>
+                    <td class="success">@customer.State</td>
+                    <td class="info">
+                        @Html.ActionLink("Edit", "Index", "Customers", new { id = customer.CustomerID }, null) ||
+                        @Html.ActionLink("Delete", "Delete", "Customers", new { id = customer.CustomerID })
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}

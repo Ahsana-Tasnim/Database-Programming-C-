@@ -1,0 +1,55 @@
+﻿@model  DBProgramming_II.Models.Invoice
+
+<h2>Add/Edit Invoice</h2>
+
+@using (Html.BeginForm("AddInvoice", "Invoices", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.InvoiceID);
+    @*@Html.HiddenFor(m => m.InvoiceLineItems);*@
+
+    <div class="row">
+        <div class="col-md-6">
+            <b>Customer ID</b>
+            @Html.TextBoxFor(c => c.CustomerID, new { @class = "form-control", @placeholder = "ID..." })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <b>Invoice Date </b>
+            @Html.TextBoxFor(c => c.InvoiceDate, new { @class = "form-control", @type = "date", @placeholder = "Date..." })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <b>Product Total </b>
+            @Html.TextBoxFor(c => c.ProductTotal, new { @class = "form-control", @placeholder = "Product Total.." })
+            <br />
+        </div>
+        <br />
+        <div class="col-md-6">
+            <b>Tax </b>
+            @Html.TextBoxFor(c => c.SalesTax, new { @class = "form-control", @placeholder = "Tax.." })
+            <br />
+        </div>
+        <br />
+        <div class="col-md-6">
+            <b>Shipping fee</b>
+            @Html.TextBoxFor(c => c.Shipping, new { @class = "form-control", @placeholder = "Shipping fee.." })
+            <br />
+        </div>
+        <br />
+        <div class="col-md-6">
+            <b>Total</b>
+            @Html.TextBoxFor(c => c.InvoiceTotal, new { @class = "form-control", @placeholder = "Total.." })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" value="Submit" />
+        </div>
+    </div>
+}

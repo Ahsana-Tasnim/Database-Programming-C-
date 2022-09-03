@@ -1,0 +1,46 @@
+﻿@model List<DBProgramming_II.Models.Invoice>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>List of Invoices</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="products" class="table">
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Invoice ID</th>
+                    <th>Product Total</th>
+                    <th>Tax</th>
+                    <th>Invoice Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var invoice in Model)
+                {
+                <tr>
+                    <td class="success">
+                        <a href="/Customers/Index/@invoice.CustomerID">@invoice.Customer.Name</a>
+                    </td>
+                    <td class="info">@invoice.InvoiceID</td>
+                    <td class="warning">@invoice.ProductTotal</td>
+                    <td class="success">@invoice.SalesTax</td>
+                    <td class="danger">@invoice.InvoiceTotal</td>
+                    <td class="info">
+                        @Html.ActionLink("Add/Edit", "AddInvoice", "Invoices", new { id = invoice.CustomerID }, null) ||
+                        @Html.ActionLink("Delete", "Delete", "Invoices", new { id = invoice.InvoiceID })
+                    </td>
+                </tr>
+                    
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

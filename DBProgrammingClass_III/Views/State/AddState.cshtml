@@ -1,0 +1,63 @@
+﻿@model DBProgrammingClass_III.Models.State
+@{
+    ViewBag.Title = "AddState";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+
+<h2>Add a State</h2>
+
+<div class="form" align="center">
+    @using (Html.BeginForm("AddState", "State", FormMethod.Post))
+    {
+        <div class="row">
+            <div>
+                <b>State Code</b>
+                <div>
+                    @Html.TextBoxFor(c => c.StateCode, new { @class = "form-control", @placeholder = "State Code.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>State Name</b>
+                <div>
+                    @Html.TextBoxFor(c => c.StateName, new { @class = "form-control", @placeholder = "State Name.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>First Zip Code</b>
+                <div>
+                    @Html.TextBoxFor(c => c.FirstZipCode, new { @class = "form-control", @placeholder = "First Zip Code.." })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <b>Last Zip Code</b>
+                <div>
+                    @Html.TextBoxFor(c => c.LastZipCode, new { @class = "form-control", @placeholder = "Last Zip Code.." })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+            <div class="col-md-12">
+                <b><input class="button" type="submit" value="Submit" /></b>
+            </div>
+            <div class="back" data-toggle="tooltip" title="Go to State List">
+                @Html.ActionLink("Back", "StateList", "State")
+            </div>
+        </div>
+    }
+</div>
+
+

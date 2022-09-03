@@ -1,0 +1,21 @@
+﻿@model DBProgrammingClass_III.Models.Registration
+@{
+    ViewBag.Title = "RegDetails";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+
+<div>
+    <label>Customer ID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.CustomerID)</label>
+    <br /><br />
+
+          <label>Product Code:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <label>@Html.TextBoxFor(x => x.ProductCode)</label>
+    <br /><br />
+
+    <label>Registration Date: </label>
+    <label>@Html.TextBoxFor(x => x.RegistrationDate)</label>
+    <br /><br />
+</div>
+

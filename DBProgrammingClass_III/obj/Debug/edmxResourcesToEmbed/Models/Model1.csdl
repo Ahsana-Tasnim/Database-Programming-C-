@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TechSupportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="ZipCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_Customers" FromRole="Customers" ToRole="Incidents" />
+    <NavigationProperty Name="Registrations" Relationship="Self.FK_Registrations_Customers" FromRole="Customers" ToRole="Registrations" />
+    <NavigationProperty Name="State1" Relationship="Self.FK_States_Customers" FromRole="Customers" ToRole="States" />
+  </EntityType>
+  <EntityType Name="Incident">
+    <Key>
+      <PropertyRef Name="IncidentID" />
+    </Key>
+    <Property Name="IncidentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TechID" Type="Int32" />
+    <Property Name="DateOpened" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateClosed" Type="DateTime" Precision="3" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Incidents_Customers" FromRole="Incidents" ToRole="Customers" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Incidents_Products" FromRole="Incidents" ToRole="Products" />
+    <NavigationProperty Name="Technician" Relationship="Self.FK_Incidents_Technicians" FromRole="Incidents" ToRole="Technicians" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Version" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
+    <Property Name="ReleaseDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_Products" FromRole="Products" ToRole="Incidents" />
+    <NavigationProperty Name="Registrations" Relationship="Self.FK_Registrations_Products" FromRole="Products" ToRole="Registrations" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Registrations_Customers" FromRole="Registrations" ToRole="Customers" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Registrations_Products" FromRole="Registrations" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateCode" />
+    </Key>
+    <Property Name="StateCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstZipCode" Type="Int32" Nullable="false" />
+    <Property Name="LastZipCode" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_States_Customers" FromRole="States" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Technician">
+    <Key>
+      <PropertyRef Name="TechID" />
+    </Key>
+    <Property Name="TechID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_Technicians" FromRole="Technicians" ToRole="Incidents" />
+  </EntityType>
+  <Association Name="FK_Incidents_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Registrations_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Registrations" Type="Self.Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Registrations">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_States_Customers">
+    <End Role="States" Type="Self.State" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateCode" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_Technicians">
+    <End Role="Technicians" Type="Self.Technician" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Technicians">
+        <PropertyRef Name="TechID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="TechID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Registrations_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Registrations" Type="Self.Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="Registrations">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TechSupportEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Incidents" EntityType="Self.Incident" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Registrations" EntityType="Self.Registration" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="Technicians" EntityType="Self.Technician" />
+    <AssociationSet Name="FK_Incidents_Customers" Association="Self.FK_Incidents_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Registrations_Customers" Association="Self.FK_Registrations_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Registrations" EntitySet="Registrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_States_Customers" Association="Self.FK_States_Customers">
+      <End Role="States" EntitySet="States" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_Products" Association="Self.FK_Incidents_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_Technicians" Association="Self.FK_Incidents_Technicians">
+      <End Role="Technicians" EntitySet="Technicians" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Registrations_Products" Association="Self.FK_Registrations_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Registrations" EntitySet="Registrations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

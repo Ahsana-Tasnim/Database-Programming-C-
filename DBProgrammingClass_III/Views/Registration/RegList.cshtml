@@ -1,0 +1,76 @@
+﻿@model List<DBProgrammingClass_III.Models.Registration>
+@{
+    ViewBag.Title = "RegList";
+}
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<script type="text/javascript" src="~/Content/app.js"></script>
+
+<div>
+    <div class="col-md-12">
+        <h2><b>List of Registrations</b></h2>
+    </div>
+</div>
+<br />
+<br />
+
+@using (Html.BeginForm("RegList", "Registration", FormMethod.Get))
+{
+    <span><b>Search: </b></span>
+    <input type="text" placeholder="Search by CustomerID..." name="searchRegByCusId" id="searchRegByCusId" />
+    <input class="button" type="submit" value="Submit" />
+
+    <div class="add" title="Add a new Registration">
+        <h4><span data-toggle="tooltip"><b>@Html.ActionLink("Add a Registration", "AddReg", "Registration")</b></span></h4>
+    </div>
+
+    <table id="regs" class="table">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Registration Date</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reg in Model)
+            {
+                <tr>
+                    <td><b>@reg.CustomerID</b></td>
+                    <td data-toggle="tooltip" title="View Registration Details" onclick="getRegDetails('@reg.CustomerID');" scope="row" class="pointer"><b>@reg.RegistrationDate</b></td>
+                    <td>
+                        <span data-toggle="tooltip" title="Edit Registration">
+                            <b>@Html.ActionLink("Edit", "AddReg", "Registration", new { id = reg.CustomerID }, null)</b>
+                        </span> ||
+                        <span data-toggle="tooltip" title="Delete Registration"><b>@Html.ActionLink("Delete", "Delete", "Registration", new { id = reg.CustomerID })</b></span>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">
+                        <b>Registration Details</b>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
